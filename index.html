@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-12-29 13:25:57 / Modified: 14:33:48" itemprop="dateCreated datePublished" datetime="2021-12-29T13:25:57+08:00">2021-12-29</time>
+              <time title="Created: 2021-12-29 13:25:57 / Modified: 15:01:52" itemprop="dateCreated datePublished" datetime="2021-12-29T13:25:57+08:00">2021-12-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,9 +219,7 @@
 </blockquote>
 <img src="/2021/12/29/Logistics-Regression%EF%BC%88%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%EF%BC%89%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/1.png" class="" alt="截屏2021-11-12 下午4.21.37">
 <h4 id="为什么要使用logistic-regression">为什么要使用logistic regression？</h4>
-<p>对于上图中，我们依据肿瘤的大小来对肿瘤是否是良性进行分类，暂时使用线性函数对样本进行拟合，洋红色是拟合出来的曲线，此时得到了一个比较好的拟合效果。我们以拟合函数值0.5作为分类的条件，输入样本特征，函数值小于0.5时属于良性肿瘤，函数值大于0.5时属于恶性肿瘤。</p>
-<p>就第一次拟合出来的洋红色曲线，似乎我们已经得到了比较好的分类效果。但考虑下面这样一个问题：</p>
-<p><strong>如果此时样本中有一个或者几个肿瘤尺寸特别的大（最右侧的红色样本点），我们的拟合函数可能为了拟合到这样的肿瘤样本点，函数图像就会从洋红色曲线变成蓝色的曲线，但是这是我们依旧使用之前的函数值大于0.5时是恶性肿瘤，函数值小于0.5时是良性肿瘤，会出现什么问题呢？</strong></p>
+<p>对于上图中，我们依据肿瘤的大小来对肿瘤是否是良性进行分类，暂时使用线性函数对样本进行拟合，洋</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/12/29/Logistics-Regression%EF%BC%88%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%EF%BC%89%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/#more" rel="contents">
@@ -367,7 +365,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-29 12:54:07" itemprop="dateModified" datetime="2021-12-29T12:54:07+08:00">2021-12-29</time>
+                <time title="Modified: 2021-12-29 15:00:18" itemprop="dateModified" datetime="2021-12-29T15:00:18+08:00">2021-12-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -390,7 +388,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="一解决mysql重新安装后启动时报错the-server-quit-without-updating-pid-fileopthomebrewvarmysql.pid">一、解决mysql重新安装后启动时报错：The server quit without updating PID file(/opt/homebrew/var/mysql/***.pid)</h3>
+          <h4 id="一解决mysql重新安装后启动时报错">一、解决mysql重新安装后启动时报错:</h4>
+<h4 id="the-server-quit-without-updating-pid-fileopthomebrewvarmysql.pid">The server quit without updating PID file(/opt/homebrew/var/mysql/***.pid)</h4>
 <p>安装homebrew之后，我尝试继续安装mysql，我使用了：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql</span><br></pre></td></tr></table></figure>
 <p>使用该命令会默认安装homebrew中最新版本的mysql，该版本有时和你项目中使用的项目中的JDBC不对应，所以我选择重新安装与我项目中JDBC相对应的mysql 版本。</p>
