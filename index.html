@@ -163,6 +163,236 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://tanciwang.cn/posts/a314b8ce/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王琛锡 | Chenxi Wang">
+      <meta itemprop="description" content="记录学习生活中的所思所悟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="涤新的藏经阁">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/a314b8ce/" class="post-title-link" itemprop="url">集成学习（EnsembleLearning）——机器学习笔记（五）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-30 20:17:28 / Modified: 21:30:57" itemprop="dateCreated datePublished" datetime="2021-12-30T20:17:28+08:00">2021-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MachineLearning/" itemprop="url" rel="index"><span itemprop="name">MachineLearning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="加法模型（Additive-Model）"><a href="#加法模型（Additive-Model）" class="headerlink" title="加法模型（Additive Model）"></a>加法模型（Additive Model）</h3><p>模型表达式为：</p>
+<script type="math/tex; mode=display">
+f(x)=\sum_{m=1}^{M} \beta^m b\left(x ; \gamma^{m}\right)\tag{1}</script><p>公式中各个参数的意义：</p>
+<p>$\begin{aligned}&amp;β^mb(x;\gamma^m)是基函数\\<br>&amp;\gamma^m是模型的参数\\<br>&amp;\beta^m是模型的权重\\&amp;M为总的迭代次数\end{aligned}$</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/a314b8ce/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://tanciwang.cn/posts/31f717fc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王琛锡 | Chenxi Wang">
+      <meta itemprop="description" content="记录学习生活中的所思所悟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="涤新的藏经阁">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/31f717fc/" class="post-title-link" itemprop="url">决策树（DecisionTree）——机器学习笔记（四）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-30 19:49:54 / Modified: 20:13:20" itemprop="dateCreated datePublished" datetime="2021-12-30T19:49:54+08:00">2021-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MachineLearning/" itemprop="url" rel="index"><span itemprop="name">MachineLearning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><p>决策树主要分为两类，分类决策树和回归决策树。</p>
+<h3 id="分类树"><a href="#分类树" class="headerlink" title="分类树"></a>分类树</h3><h3 id="回归树"><a href="#回归树" class="headerlink" title="回归树"></a>回归树</h3><p>假设X和Y分别为输入和输出变量，并且Y是连续变量，给定训练数据$D={(x_1,y_1),(x_2,y_2),…(x_N,y_N)}$考虑如何生成回归树。</p>
+<p>对于回归树的构建，我们主要需要考虑的问题有：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/31f717fc/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://tanciwang.cn/posts/76adea27/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王琛锡 | Chenxi Wang">
+      <meta itemprop="description" content="记录学习生活中的所思所悟">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="涤新的藏经阁">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/76adea27/" class="post-title-link" itemprop="url">过拟合问题的处理（OverFittijng）——机器学习笔记（三）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-30 19:30:33 / Modified: 19:48:56" itemprop="dateCreated datePublished" datetime="2021-12-30T19:30:33+08:00">2021-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MachineLearning/" itemprop="url" rel="index"><span itemprop="name">MachineLearning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="过拟合问题"><a href="#过拟合问题" class="headerlink" title="过拟合问题"></a>过拟合问题</h2><h3 id="过拟合问题的概念"><a href="#过拟合问题的概念" class="headerlink" title="过拟合问题的概念"></a>过拟合问题的概念</h3><h4 id="线性回归曲线："><a href="#线性回归曲线：" class="headerlink" title="线性回归曲线："></a>线性回归曲线：</h4><img src="/posts/76adea27/1.png" class="">
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/76adea27/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://tanciwang.cn/posts/d831fc50/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -211,15 +441,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="逻辑斯蒂回归logistic-regression">逻辑斯蒂回归（logistic regression）</h3>
-<p>思考以下两个问题：</p>
+          <h3 id="逻辑斯蒂回归（logistic-regression）"><a href="#逻辑斯蒂回归（logistic-regression）" class="headerlink" title="逻辑斯蒂回归（logistic regression）"></a>逻辑斯蒂回归（logistic regression）</h3><p>思考以下两个问题：</p>
 <blockquote>
 <p>1.为什么要使用logistic regression？</p>
 <p>2.是一个分类算法，为什么要用到回归这样的字眼？</p>
 </blockquote>
 <img src="/posts/d831fc50/1.png" class="" alt="1">
-<h4 id="为什么要使用logistic-regression">为什么要使用logistic regression？</h4>
-<p>对于上图中，我们依据肿瘤的大小来对肿瘤是否是良性进行分类，暂时使用线性函数对样本进行拟合，洋</p>
+<h4 id="为什么要使用logistic-regression？"><a href="#为什么要使用logistic-regression？" class="headerlink" title="为什么要使用logistic regression？"></a>为什么要使用logistic regression？</h4><p>对于上图中，我们依据肿瘤的大小来对肿瘤是否是良性进行分类，暂时使用线性函数对样本进行拟合，洋</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/d831fc50/#more" rel="contents">
@@ -300,11 +528,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="线性回归">线性回归</h2>
-<p>线性模型试图学得一个通过属性（特征）的线性组合来进行预测的函数，即</p>
+          <h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>线性模型试图学得一个通过属性（特征）的线性组合来进行预测的函数，即</p>
 <img src="/posts/9d031208/%E5%9B%BE%E7%89%871.png" class="" alt="图片1">
 <p>一般用向量形式写成：<img src="/posts/9d031208/%E5%9B%BE%E7%89%872.png" class="" alt="图片2"></p>
-<p>其中。<span class="math inline">\(\omega\)</span>、b习得之后，模型即得以确定。</p>
+<p>其中。$\omega$、b习得之后，模型即得以确定。 </p>
 <ul>
 <li>许多功能强大的非线性模型就是在线性的基础之上，通过引入层级结构或高纬映射来得到。</li>
 </ul>
@@ -388,9 +615,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="一解决mysql重新安装后启动时报错">一、解决mysql重新安装后启动时报错:</h4>
-<h4 id="the-server-quit-without-updating-pid-fileopthomebrewvarmysql.pid">The server quit without updating PID file(/opt/homebrew/var/mysql/***.pid)</h4>
-<p>安装homebrew之后，我尝试继续安装mysql，我使用了：</p>
+          <h4 id="一、解决mysql重新安装后启动时报错"><a href="#一、解决mysql重新安装后启动时报错" class="headerlink" title="一、解决mysql重新安装后启动时报错:"></a>一、解决mysql重新安装后启动时报错:</h4><h4 id="The-server-quit-without-updating-PID-file-opt-homebrew-var-mysql-pid"><a href="#The-server-quit-without-updating-PID-file-opt-homebrew-var-mysql-pid" class="headerlink" title="The server quit without updating PID file(/opt/homebrew/var/mysql/***.pid)"></a>The server quit without updating PID file(/opt/homebrew/var/mysql/***.pid)</h4><p>安装homebrew之后，我尝试继续安装mysql，我使用了：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql</span><br></pre></td></tr></table></figure>
 <p>使用该命令会默认安装homebrew中最新版本的mysql，该版本有时和你项目中使用的项目中的JDBC不对应，所以我选择重新安装与我项目中JDBC相对应的mysql 版本。</p>
           <!--noindex-->
@@ -481,7 +706,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -494,7 +719,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
