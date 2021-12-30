@@ -27,22 +27,22 @@
 <meta property="og:site_name" content="涤新的藏经阁">
 <meta property="og:description" content="逻辑斯蒂回归（logistic regression） 思考以下两个问题：  1.为什么要使用logistic regression？ 2.是一个分类算法，为什么要用到回归这样的字眼？   为什么要使用logistic regression？ 对于上图中，我们依据肿瘤的大小来对肿瘤是否是良性进行分类，暂时使用线性函数对样本进行拟合，洋">
 <meta property="og:locale">
-<meta property="og:image" content="https://tanciwang.cn/posts/undefined/1.png">
-<meta property="og:image" content="https://tanciwang.cn/posts/undefined/2.png">
-<meta property="og:image" content="https://tanciwang.cn/posts/undefined/3.png">
-<meta property="og:image" content="https://tanciwang.cn/posts/undefined/4.png">
-<meta property="og:image" content="https://tanciwang.cn/posts/undefined/5.png">
-<meta property="og:image" content="https://tanciwang.cn/posts/undefined/6.png">
-<meta property="og:image" content="https://tanciwang.cn/posts/undefined/8.png">
-<meta property="og:image" content="https://tanciwang.cn/posts/undefined/7.png">
+<meta property="og:image" content="https://tanciwang.cn/posts/d831fc50/1.png">
+<meta property="og:image" content="https://tanciwang.cn/posts/d831fc50/2.png">
+<meta property="og:image" content="https://tanciwang.cn/posts/d831fc50/3.png">
+<meta property="og:image" content="https://tanciwang.cn/posts/d831fc50/4.png">
+<meta property="og:image" content="https://tanciwang.cn/posts/d831fc50/5.png">
+<meta property="og:image" content="https://tanciwang.cn/posts/d831fc50/6.png">
+<meta property="og:image" content="https://tanciwang.cn/posts/d831fc50/8.png">
+<meta property="og:image" content="https://tanciwang.cn/posts/d831fc50/7.png">
 <meta property="article:published_time" content="2021-12-30T08:18:13.000Z">
-<meta property="article:modified_time" content="2021-12-30T08:18:58.101Z">
+<meta property="article:modified_time" content="2021-12-30T08:45:38.084Z">
 <meta property="article:author" content="王琛锡 | Chenxi Wang">
 <meta property="article:tag" content="MachineLearning">
 <meta property="article:tag" content="LogisticsRegression">
 <meta property="article:tag" content="逻辑回归">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tanciwang.cn/posts/undefined/1.png">
+<meta name="twitter:image" content="https://tanciwang.cn/posts/d831fc50/1.png">
 
 <link rel="canonical" href="https://tanciwang.cn/posts/d831fc50/">
 
@@ -202,7 +202,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-12-30 16:18:13 / Modified: 16:18:58" itemprop="dateCreated datePublished" datetime="2021-12-30T16:18:13+08:00">2021-12-30</time>
+              <time title="Created: 2021-12-30 16:18:13 / Modified: 16:45:38" itemprop="dateCreated datePublished" datetime="2021-12-30T16:18:13+08:00">2021-12-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -231,7 +231,7 @@
 <p>1.为什么要使用logistic regression？</p>
 <p>2.是一个分类算法，为什么要用到回归这样的字眼？</p>
 </blockquote>
-<img src="/posts/undefined/1.png" class="" alt="1">
+<img src="/posts/d831fc50/1.png" class="" alt="1">
 <h4 id="为什么要使用logistic-regression">为什么要使用logistic regression？</h4>
 <p>对于上图中，我们依据肿瘤的大小来对肿瘤是否是良性进行分类，暂时使用线性函数对样本进行拟合，洋</p>
 <span id="more"></span>
@@ -248,18 +248,18 @@
  &amp;h_{\theta}(x)=\theta ^{T} X，其中\theta ^{T}=\left [  \theta _{0} ,\theta _{1} ,\theta _{2} ...\theta _{i} \right ] ，X=\begin{bmatrix}\\1 \\x_{1}\\x_{2}\\...\\x_{i}\end{bmatrix}\end{aligned}
 \]</span> <span class="math inline">\(g(z)\)</span>就是我们常说的sigmoid函数，或者叫logistic函数</p>
 <p>函数图像：</p>
-<img src="/posts/undefined/2.png" class="" alt="2">
+<img src="/posts/d831fc50/2.png" class="" alt="2">
 <p><span class="math inline">\(z=h_{\omega}(x)\)</span>是我们所说的决策边界。</p>
 <blockquote>
 <p>决策边界不是训练集固有的属性，使我们假设出来的，拟合出来的这样一个函数</p>
 </blockquote>
 <p>下图中红色圆就是我们拟合出的这个决策边界，依据这个决策边界我们将样本分为了两类。</p>
-<img src="/posts/undefined/3.png" class="" alt="3">
+<img src="/posts/d831fc50/3.png" class="" alt="3">
 <h4 id="代价函数">代价函数</h4>
 <p>之前线性回归的代价函数： <span class="math display">\[
 J(\theta )=\frac{1}{m} \sum_{i=1}^{m} (h_{\theta}(x^{(i)})-y^{(i)})^{2}
 \]</span> 上式中的<span class="math inline">\(h_{\theta}(x)\)</span>在逻辑回归的模型中对应的函数是<span class="math inline">\(g(z)\)</span>，即<span class="math inline">\(g(h_{\theta}(x))\)</span>，对于这样的一个sigmoid函数如果我们也按照之前的代价函数代入的话，即<span class="math inline">\(J(\theta )=\frac{1}{m} \sum_{i=1}^{m} (g(z^{(i)})-y^{(i)})^{2}\)</span>，这个函数是其实是一个非凸函数，可能类似于下图：</p>
-<img src="/posts/undefined/4.png" class="" alt="4">
+<img src="/posts/d831fc50/4.png" class="" alt="4">
 <p>对于这样一个函数，我们是无法求出其全局的最小值的，它只有局部的最优解。</p>
 <blockquote>
 <p>数学中的凸函数和凹函数和我们此处的称法<strong>有所区别</strong>，类似开口向上的二次函数，我们数学中称它为<strong>凹函数</strong>，或者<strong>向上凹</strong>的函数，而我们此处将这种有最值的函数都称为<strong>凸函数</strong>。</p>
@@ -272,12 +272,12 @@ J(\theta )=\frac{1}{m} \sum_{i=1}^{m} (h_{\theta}(x^{(i)})-y^{(i)})^{2}
 </ul>
 </blockquote>
 <p>故给出下面逻辑回归的代价函数：</p>
-<img src="/posts/undefined/5.png" class="" alt="5">
+<img src="/posts/d831fc50/5.png" class="" alt="5">
 <p>对应的不同的损失函数图像为：</p>
 <p><span class="math inline">\(-\log_{}{g(z)},y = 1\)</span>部分为：</p>
-<img src="/posts/undefined/6.png" class="" alt="6">
+<img src="/posts/d831fc50/6.png" class="" alt="6">
 <p><span class="math inline">\(-log(1-g(z)),y=0\)</span>部分为：</p>
-<img src="/posts/undefined/8.png" class="" alt="8">
+<img src="/posts/d831fc50/8.png" class="" alt="8">
 <p>将上述代价函数归一化处理： <span class="math display">\[
 Cost(g(z),x) =-y\cdot\log_{}{g(z)}-(1-y)\cdot\log_{}{(1-g(z))}
 \]</span> 对于上述函数我们就可以利用梯度下降算法实现梯度更新。</p>
@@ -287,7 +287,7 @@ Cost(g(z),x) =-y\cdot\log_{}{g(z)}-(1-y)\cdot\log_{}{(1-g(z))}
 <p>首先要说明的是，虽然此处们用的对数表示是log，但其实换成自然对数ln效果是一样的。</p>
 </blockquote>
 <p>先对代价函数进行化简：</p>
-<img src="/posts/undefined/7.png" class="" alt="7">
+<img src="/posts/d831fc50/7.png" class="" alt="7">
 <p>再对代价函数求偏导（对<span class="math inline">\(w\)</span>求偏导）： <span class="math display">\[
 \begin{aligned}
 Cos{t \prime }(g(z),x)&amp;=\frac{\partial(Cost)}{\partial w}\\
