@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"tanciwang.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="加法模型（Additive Model）模型表达式为：  f(x)&#x3D;\sum_{m&#x3D;1}^{M} \beta^m b\left(x ; \gamma^{m}\right)\tag{1}公式中各个参数的意义： $\begin{aligned}&amp;β^mb(x;\gamma^m)是基函数\\&amp;\gamma^m是模型的参数\\&amp;\beta^m是模型的权重\\&amp;M为总的迭代次">
+  <meta name="description" content="加法模型（Additive Model） 模型表达式为： \[ f(x)&#x3D;\sum_{m&#x3D;1}^{M} \beta^m b\left(x ; \gamma^{m}\right)\tag{1} \] 公式中各个参数的意义： \(\begin{aligned}&amp;β^mb(x;\gamma^m)是基函数\\ &amp;\gamma^m是模型的参数\\ &amp;\beta^m是模型的权重\\&amp;a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="集成学习（EnsembleLearning）——机器学习笔记（五）">
 <meta property="og:url" content="https://tanciwang.cn/posts/a314b8ce/index.html">
 <meta property="og:site_name" content="涤新的藏经阁">
-<meta property="og:description" content="加法模型（Additive Model）模型表达式为：  f(x)&#x3D;\sum_{m&#x3D;1}^{M} \beta^m b\left(x ; \gamma^{m}\right)\tag{1}公式中各个参数的意义： $\begin{aligned}&amp;β^mb(x;\gamma^m)是基函数\\&amp;\gamma^m是模型的参数\\&amp;\beta^m是模型的权重\\&amp;M为总的迭代次">
+<meta property="og:description" content="加法模型（Additive Model） 模型表达式为： \[ f(x)&#x3D;\sum_{m&#x3D;1}^{M} \beta^m b\left(x ; \gamma^{m}\right)\tag{1} \] 公式中各个参数的意义： \(\begin{aligned}&amp;β^mb(x;\gamma^m)是基函数\\ &amp;\gamma^m是模型的参数\\ &amp;\beta^m是模型的权重\\&amp;a">
 <meta property="og:locale">
 <meta property="og:image" content="https://tanciwang.cn/posts/a314b8ce/2.png">
 <meta property="og:image" content="https://tanciwang.cn/posts/a314b8ce/3.png">
@@ -219,186 +219,198 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="加法模型（Additive-Model）"><a href="#加法模型（Additive-Model）" class="headerlink" title="加法模型（Additive Model）"></a>加法模型（Additive Model）</h3><p>模型表达式为：</p>
-<script type="math/tex; mode=display">
-f(x)=\sum_{m=1}^{M} \beta^m b\left(x ; \gamma^{m}\right)\tag{1}</script><p>公式中各个参数的意义：</p>
-<p>$\begin{aligned}&amp;β^mb(x;\gamma^m)是基函数\\<br>&amp;\gamma^m是模型的参数\\<br>&amp;\beta^m是模型的权重\\&amp;M为总的迭代次数\end{aligned}$</p>
+        <h3 id="加法模型additive-model">加法模型（Additive Model）</h3>
+<p>模型表达式为： <span class="math display">\[
+f(x)=\sum_{m=1}^{M} \beta^m b\left(x ; \gamma^{m}\right)\tag{1}
+\]</span> 公式中各个参数的意义：</p>
+<p><span class="math inline">\(\begin{aligned}&amp;β^mb(x;\gamma^m)是基函数\\ &amp;\gamma^m是模型的参数\\ &amp;\beta^m是模型的权重\\&amp;M为总的迭代次数\end{aligned}\)</span></p>
 <span id="more"></span>
-<h4 id="加法模型损失函数"><a href="#加法模型损失函数" class="headerlink" title="加法模型损失函数"></a>加法模型损失函数</h4><p>损失函数的形式：</p>
-<script type="math/tex; mode=display">
-\min _{\beta^m, \gamma^{m}} \sum_{i=1}^{N} L\left(y^{i}, \sum_{m=1}^{M} \beta^m b\left(x^{i} ; \gamma^{m}\right)\right)\tag{2}</script><p>损失函数可以是我们自定义的各种函数，如指数损失函数等等。</p>
-<h4 id="损失函数的优化——前向分步算法"><a href="#损失函数的优化——前向分步算法" class="headerlink" title="损失函数的优化——前向分步算法"></a>损失函数的优化——前向分步算法</h4><h5 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h5><p>前向分步算法更为通用的表达形式为：</p>
-<script type="math/tex; mode=display">
-\left(\beta^{m}, \gamma^{m}\right)=\arg \min _{\beta, \gamma} \sum_{i=1}^{N} L\left(y^{i}, f^{m-1}\left(x^{i}\right)+\beta b\left(x^{i}, \gamma\right)\right)\tag{3}</script><p>可以考虑下面这个问题：</p>
+<h4 id="加法模型损失函数">加法模型损失函数</h4>
+<p>损失函数的形式： <span class="math display">\[
+\min _{\beta^m, \gamma^{m}} \sum_{i=1}^{N} L\left(y^{i}, \sum_{m=1}^{M} \beta^m b\left(x^{i} ; \gamma^{m}\right)\right)\tag{2}
+\]</span> 损失函数可以是我们自定义的各种函数，如指数损失函数等等。</p>
+<h4 id="损失函数的优化前向分步算法">损失函数的优化——前向分步算法</h4>
+<h5 id="算法原理">算法原理</h5>
+<p>前向分步算法更为通用的表达形式为： <span class="math display">\[
+\left(\beta^{m}, \gamma^{m}\right)=\arg \min _{\beta, \gamma} \sum_{i=1}^{N} L\left(y^{i}, f^{m-1}\left(x^{i}\right)+\beta b\left(x^{i}, \gamma\right)\right)\tag{3}
+\]</span> 可以考虑下面这个问题：</p>
 <ul>
 <li><p>为什么加法模型的优化用的是前向分步算法而不是均方误差损失函数（MSE）这样的算法？</p>
 <blockquote>
-<p> 如果我们采用前向分步算法，对于（3）式其中的$f^{m-1}\left(x^{i}\right)$相当于我们已经确定的数值，我们需要做的仅仅是在当前第$m$步的模型预测过程中得到新模型中的参数$\gamma^m$和模型的新权重$\beta^m$。</p>
-<p>而如果我们采用的损失函数是MSE，那可能的表达式为：</p>
-<script type="math/tex; mode=display">
-\left(\beta^{m}, \gamma^{m}\right)=\arg \min _{\beta, \gamma} \sum_{i=1}^{N} \left(y^{i}-\sum_{m=1}^{M}\beta^m b\left(x^{i}, \gamma^m\right)\right)^2\tag{4}</script><p>这样我们可以看到一次性要通过损失函数优化确定的参数是非常多的，$\beta^m$会有m个，$\gamma$向量也会有m个，这大大增加了我们损失函数优化的难度。</p>
-<p>而前向分步算法，我们在每一步加上新的基函数模型时，便已确定了我们新函数的权重，以及其中的$\gamma$向量，即每次确定一个。</p>
-</blockquote>
-</li>
+<p>如果我们采用前向分步算法，对于（3）式其中的<span class="math inline">\(f^{m-1}\left(x^{i}\right)\)</span>相当于我们已经确定的数值，我们需要做的仅仅是在当前第<span class="math inline">\(m\)</span>步的模型预测过程中得到新模型中的参数<span class="math inline">\(\gamma^m\)</span>和模型的新权重<span class="math inline">\(\beta^m\)</span>。</p>
+<p>而如果我们采用的损失函数是MSE，那可能的表达式为： <span class="math display">\[
+\left(\beta^{m}, \gamma^{m}\right)=\arg \min _{\beta, \gamma} \sum_{i=1}^{N} \left(y^{i}-\sum_{m=1}^{M}\beta^m b\left(x^{i}, \gamma^m\right)\right)^2\tag{4}
+\]</span> 这样我们可以看到一次性要通过损失函数优化确定的参数是非常多的，<span class="math inline">\(\beta^m\)</span>会有m个，<span class="math inline">\(\gamma\)</span>向量也会有m个，这大大增加了我们损失函数优化的难度。</p>
+<p>而前向分步算法，我们在每一步加上新的基函数模型时，便已确定了我们新函数的权重，以及其中的<span class="math inline">\(\gamma\)</span>向量，即每次确定一个。</p>
+</blockquote></li>
 </ul>
-<h5 id="前向分步算法具体的执行流程"><a href="#前向分步算法具体的执行流程" class="headerlink" title="前向分步算法具体的执行流程"></a>前向分步算法具体的执行流程</h5><p>用于分类时的分类器定义：</p>
-<script type="math/tex; mode=display">
+<h5 id="前向分步算法具体的执行流程">前向分步算法具体的执行流程</h5>
+<p>用于分类时的分类器定义： <span class="math display">\[
 sign[f(x)]=\left\{
                   \begin{aligned}
-                  &=1,f(x)>0 \\
-                  &=-1,f(x)<0 
+                  &amp;=1,f(x)&gt;0 \\
+                  &amp;=-1,f(x)&lt;0 
                   \end{aligned}
                   \right.
-\tag{5}</script><p>损失选择指数损失：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}e^{[-y_i*f(x_i)]}\end{aligned}\tag{6}</script><p>选择指数损失的意义：</p>
+\tag{5}
+\]</span> 损失选择指数损失： <span class="math display">\[
+\begin{aligned}e^{[-y_i*f(x_i)]}\end{aligned}\tag{6}
+\]</span> 选择指数损失的意义：</p>
 <ul>
-<li>当分类正确时，f(x)与$y_i$同号，损失为小于1的数，且$|f(x)|$越大，Cost越接近0</li>
-<li>当分类错误时，f(x)与$y_i$异号，损失为大于1的数，且$|f(x)|$越大，Cost越大</li>
+<li>当分类正确时，f(x)与<span class="math inline">\(y_i\)</span>同号，损失为小于1的数，且<span class="math inline">\(|f(x)|\)</span>越大，Cost越接近0</li>
+<li>当分类错误时，f(x)与<span class="math inline">\(y_i\)</span>异号，损失为大于1的数，且<span class="math inline">\(|f(x)|\)</span>越大，Cost越大</li>
 </ul>
-<p>则此时具体的损失函数为：</p>
-<script type="math/tex; mode=display">
+<p>则此时具体的损失函数为： <span class="math display">\[
 \begin{aligned}
-L(y_i;f_m(x)) &= exp[-y_i \cdot f_m(x)]\\
-&=exp[-y_i \cdot \sum_{m=1}^{M}\alpha_mG_m(x)]\\
-&=exp[-y_i \cdot (f_{m-1}(x)+\alpha_mG_m(x))]
+L(y_i;f_m(x)) &amp;= exp[-y_i \cdot f_m(x)]\\
+&amp;=exp[-y_i \cdot \sum_{m=1}^{M}\alpha_mG_m(x)]\\
+&amp;=exp[-y_i \cdot (f_{m-1}(x)+\alpha_mG_m(x))]
 \end{aligned}
-\tag{7}</script><p>其中$G_m(x)$是基函数。</p>
-<p>对（7）式再进行化简，将会得到每次迭代的$f(x)$中每个样本新的权值。</p>
-<p>推导过程如下：</p>
-<script type="math/tex; mode=display">
+\tag{7}
+\]</span> 其中<span class="math inline">\(G_m(x)\)</span>是基函数。</p>
+<p>对（7）式再进行化简，将会得到每次迭代的<span class="math inline">\(f(x)\)</span>中每个样本新的权值。</p>
+<p>推导过程如下： <span class="math display">\[
 \begin{aligned}
-L(y_i;f_m(x))&=e^{[-y_i \cdot (f_{m-1}(x)+\alpha_mG_m(x))]}\\
-                         &=e^{-y_if_{m-1}} \cdot e^{\alpha_mG_m(x)}\\
-\end{aligned}</script><p>令$\omega_i^{m} = e^{-y_if_{m-1}(x_i)}$，这个式子代表的含义是第m次迭代时，更新上一轮迭代中的样本权重，即：</p>
+L(y_i;f_m(x))&amp;=e^{[-y_i \cdot (f_{m-1}(x)+\alpha_mG_m(x))]}\\
+                         &amp;=e^{-y_if_{m-1}} \cdot e^{\alpha_mG_m(x)}\\
+\end{aligned}
+\]</span> 令<span class="math inline">\(\omega_i^{m} = e^{-y_if_{m-1}(x_i)}\)</span>，这个式子代表的含义是第m次迭代时，更新上一轮迭代中的样本权重，即：</p>
 <blockquote>
 <ul>
-<li><p>上一轮迭代中分类错误的样本在本轮迭代时将赋上更大的权重——放大样本</p>
-</li>
-<li><p>上一轮迭代中分类正确的样本在本轮迭代时将赋上比较小的权重——缩小样本</p>
-</li>
+<li><p>上一轮迭代中分类错误的样本在本轮迭代时将赋上更大的权重——放大样本</p></li>
+<li><p>上一轮迭代中分类正确的样本在本轮迭代时将赋上比较小的权重——缩小样本</p></li>
 </ul>
 </blockquote>
-<p>则第m轮更新时总的损失：</p>
-<script type="math/tex; mode=display">
+<p>则第m轮更新时总的损失： <span class="math display">\[
 \begin{aligned}
 \sum_{i=1}^nL(y_i;f_m(x))
-&=\sum_{i=1}^ne^{-y_if_{m-1}} \cdot e^{\alpha_mG_m(x_i)}\\
-&=\sum_{i=1}^n\omega_i^{m}e^{\alpha_mG_m(x_i)}
-\end{aligned}</script><p>$G_m(x_i)的取值只有-1和1两种$，所以：</p>
-<script type="math/tex; mode=display">
+&amp;=\sum_{i=1}^ne^{-y_if_{m-1}} \cdot e^{\alpha_mG_m(x_i)}\\
+&amp;=\sum_{i=1}^n\omega_i^{m}e^{\alpha_mG_m(x_i)}
+\end{aligned}
+\]</span> <span class="math inline">\(G_m(x_i)的取值只有-1和1两种\)</span>，所以： <span class="math display">\[
 \sum_{i=1}^n\omega_i^{m}e^{\alpha_mG_m(x_i)}
 =e^{-\alpha_m}\sum_{y_i=G(x_i)}\omega_i^{m}
  +e^{\alpha_m}\sum_{y_i\ne G(x_i)}\omega_i^{m}
- \tag{8}</script><p>要求损失函数的最小值，(8)对$\alpha_m$求导导数为0得：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}&\frac{\mathrm{d}}{\mathrm{d}\alpha_m}\sum_{i=1}^n\omega_i^{m}e^{\alpha_mG_m(x_i)}=
+ \tag{8}
+\]</span> 要求损失函数的最小值，(8)对<span class="math inline">\(\alpha_m\)</span>求导导数为0得： <span class="math display">\[
+\begin{aligned}&amp;\frac{\mathrm{d}}{\mathrm{d}\alpha_m}\sum_{i=1}^n\omega_i^{m}e^{\alpha_mG_m(x_i)}=
 e^{\alpha_m}\sum_{y_i\ne G(x_i)}\omega_i^{m}-e^{-\alpha_m}\sum_{y_i= G(x_i)}\omega_i^{m}=0\\
-&e^{\alpha_m}\sum_{y_i\ne G(x_i)}\omega_i^{m}=e^{-\alpha_m}\sum_{y_i=G(x_i)}\omega_i^{m}\\\end{aligned}
-\tag{9}</script><p>对（9）两边取对数$ln$，得：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}\alpha_m+ln\sum_{y_i\ne G(x_i)}\omega_i^m&=-\alpha_m+ln\sum_{y_i=G(x_i)}\omega_i^m\\
-2\alpha_m&=ln\frac{\underset{y_i=G(x_i)}{\sum\omega_i^m}}{\underset{y_i\ne G(x_i)}{\sum\omega_i^m}}\\
-\end{aligned}</script><p>再化简：</p>
+&amp;e^{\alpha_m}\sum_{y_i\ne G(x_i)}\omega_i^{m}=e^{-\alpha_m}\sum_{y_i=G(x_i)}\omega_i^{m}\\\end{aligned}
+\tag{9}
+\]</span> 对（9）两边取对数<span class="math inline">\(ln\)</span>，得： <span class="math display">\[
+\begin{aligned}\alpha_m+ln\sum_{y_i\ne G(x_i)}\omega_i^m&amp;=-\alpha_m+ln\sum_{y_i=G(x_i)}\omega_i^m\\
+2\alpha_m&amp;=ln\frac{\underset{y_i=G(x_i)}{\sum\omega_i^m}}{\underset{y_i\ne G(x_i)}{\sum\omega_i^m}}\\
+\end{aligned}
+\]</span> 再化简：</p>
 <img src="/posts/a314b8ce/2.png" class="" alt="2">
-<p>(10)上下同除$\underset{i=1}{\overset{n}{\sum}}\omega_i^m$，得：</p>
+<p>(10)上下同除<span class="math inline">\(\underset{i=1}{\overset{n}{\sum}}\omega_i^m\)</span>，得：</p>
 <img src="/posts/a314b8ce/3.png" class="" alt="3">
-<p>其中，$\frac{\underset{y_i\ne G(x_i)}{\sum\omega_i^m}}{\underset{i=1}{\overset{n}{\sum}}\omega_i^m}$是分类错误率/误差率，可以用$e_m$来表示，则(11)化简为：</p>
-<script type="math/tex; mode=display">
-\alpha_m=ln\frac{1-e_m}{e_m}\tag{12}</script><p>(12)即为最终的化简结果，我们可以发现分类误差率越大，$\alpha_m$取值越小，这样的特性正好可以满足我们对模型加权过程的要求，即：分类误差率越大的基模型在整个加法模型中赋予的权值越小。</p>
+<p>其中，<span class="math inline">\(\frac{\underset{y_i\ne G(x_i)}{\sum\omega_i^m}}{\underset{i=1}{\overset{n}{\sum}}\omega_i^m}\)</span>是分类错误率/误差率，可以用<span class="math inline">\(e_m\)</span>来表示，则(11)化简为： <span class="math display">\[
+\alpha_m=ln\frac{1-e_m}{e_m}\tag{12}
+\]</span> (12)即为最终的化简结果，我们可以发现分类误差率越大，<span class="math inline">\(\alpha_m\)</span>取值越小，这样的特性正好可以满足我们对模型加权过程的要求，即：分类误差率越大的基模型在整个加法模型中赋予的权值越小。</p>
 <p>以上即是我们前向分步算法的整体流程，通过前向分步算法对损失函数极小化的过程中，我们获取了每步新的基模型加权的权值和并且更新了新一轮代入模型进行计算的样本的权值。</p>
-<h3 id="AdaBoost-Adaptive-Boosting——自适应增强器"><a href="#AdaBoost-Adaptive-Boosting——自适应增强器" class="headerlink" title="AdaBoost(Adaptive Boosting——自适应增强器)"></a>AdaBoost(Adaptive Boosting——自适应增强器)</h3><h4 id="AdaBoost算法原理"><a href="#AdaBoost算法原理" class="headerlink" title="AdaBoost算法原理"></a>AdaBoost算法原理</h4><p>假设给定一个二类分类的训练数据集</p>
-<script type="math/tex; mode=display">
-T=\left \{(x_1,y_1),(x_2,y_2),...,(x_N,y_N)  \right \}，其中x\in R^n ，y \in \left \{-1,+1\right\}</script><p>基分类器为$G_m(x)$，训练M轮，得到最终模型$G(x)$。</p>
+<h3 id="adaboostadaptive-boosting自适应增强器">AdaBoost(Adaptive Boosting——自适应增强器)</h3>
+<h4 id="adaboost算法原理">AdaBoost算法原理</h4>
+<p>假设给定一个二类分类的训练数据集 <span class="math display">\[
+T=\left \{(x_1,y_1),(x_2,y_2),...,(x_N,y_N)  \right \}，其中x\in R^n ，y \in \left \{-1,+1\right\}
+\]</span> 基分类器为<span class="math inline">\(G_m(x)\)</span>，训练M轮，得到最终模型<span class="math inline">\(G(x)\)</span>。</p>
 <p>主要算法原理如下：</p>
-<p>(1)初始化训练数据权值分布</p>
-<script type="math/tex; mode=display">
-D_1 = (w_{11},...,w_{1i},...,w_{1N}),w_{1i}=\frac{1}{N},i=1,2,...,N</script><p>(2)对$m=1,2,…,M$</p>
+<p>(1)初始化训练数据权值分布 <span class="math display">\[
+D_1 = (w_{11},...,w_{1i},...,w_{1N}),w_{1i}=\frac{1}{N},i=1,2,...,N
+\]</span> (2)对<span class="math inline">\(m=1,2,...,M\)</span></p>
 <ul>
-<li><p>使用具有权值分布$D_m$的训练数据集学习，得到基本分类器：</p>
-<script type="math/tex; mode=display">
-G_m(x)=\underset{G_{(x)}}{argmin}\sum_{i=1}^{N}w_i^{(m)}\mathbb{I}(y_i \ne G_{x_i})\tag{1}</script><p>对公式(1)的解释：选取使得总误差最小的阈值来设计分类器</p>
-</li>
-<li><p>计算$G_m(x)$在训练集上的误差率：</p>
-<script type="math/tex; mode=display">
+<li><p>使用具有权值分布<span class="math inline">\(D_m\)</span>的训练数据集学习，得到基本分类器： <span class="math display">\[
+G_m(x)=\underset{G_{(x)}}{argmin}\sum_{i=1}^{N}w_i^{(m)}\mathbb{I}(y_i \ne G_{x_i})\tag{1}
+\]</span> 对公式(1)的解释：选取使得总误差最小的阈值来设计分类器</p></li>
+<li><p>计算<span class="math inline">\(G_m(x)\)</span>在训练集上的误差率： <span class="math display">\[
 e_m=\frac{\sum_{i=1}^{N}w_i^{(m)}\mathbb{I}(y_i \ne G_{x_i})}{\sum_{i=1}^{N}w_i^{(m)}}
-\tag{2}</script></li>
-<li><p>计算分类器$G_m(x)$的系数：</p>
-<script type="math/tex; mode=display">
+\tag{2}
+\]</span></p></li>
+<li><p>计算分类器<span class="math inline">\(G_m(x)\)</span>的系数： <span class="math display">\[
 \alpha_m=ln\frac{1-e_m}{e_m}
-\tag{3}</script></li>
-<li><p>更新样本权重分布：</p>
-<script type="math/tex; mode=display">
+\tag{3}
+\]</span></p></li>
+<li><p>更新样本权重分布： <span class="math display">\[
 w_i^{(m+1)}=\frac{w_i^{m}e^{-y_i\alpha_mG_m(x_i)}}{Z^{(m)}},\qquad i=1,2,3...N\\
-\tag{4}</script><p>其中，$Z^{(m)}$是规范化因子</p>
-<script type="math/tex; mode=display">
+\tag{4}
+\]</span> 其中，<span class="math inline">\(Z^{(m)}\)</span>是规范化因子 <span class="math display">\[
 Z^{(m)}=\sum_{i=1}^Nw_i^{(m)}e^{-y_i\alpha_mG_m(x_i)}
-\tag{5}</script><p>通过归一化操作，确保了所有的$w_i^{(m+1)}$构成一个分布。</p>
-</li>
+\tag{5}
+\]</span> 通过归一化操作，确保了所有的<span class="math inline">\(w_i^{(m+1)}\)</span>构成一个分布。</p></li>
 </ul>
-<p>（3）输出最终模型：</p>
-<script type="math/tex; mode=display">
+<p>（3）输出最终模型： <span class="math display">\[
 G_(x)=sign\left [\sum_{m=1}^M\alpha_mG_m(x)  \right ] 
-\tag{6}</script><h4 id="AdaBoost和前向分步算法的异同"><a href="#AdaBoost和前向分步算法的异同" class="headerlink" title="AdaBoost和前向分步算法的异同"></a>AdaBoost和前向分步算法的异同</h4><p>通过对Adaboost算法原理的阐述，我们可以看出AdaBoost在算法的主要执行过程中和前向分步算法是大同小异的，主要区别就在第m轮迭代时对样本更新权重的操作上：</p>
+\tag{6}
+\]</span></p>
+<h4 id="adaboost和前向分步算法的异同">AdaBoost和前向分步算法的异同</h4>
+<p>通过对Adaboost算法原理的阐述，我们可以看出AdaBoost在算法的主要执行过程中和前向分步算法是大同小异的，主要区别就在第m轮迭代时对样本更新权重的操作上：</p>
 <ul>
-<li><p>前向分步算法的操作为：$\omega_i^{(m+1)} = e^{-y_if_{m}(x_i)}$</p>
-</li>
-<li><p>AdaBoost的操作为：</p>
-<script type="math/tex; mode=display">
-w_i^{(m+1)}=\frac{w_i^{m}e^{-y_i\alpha_mG_m(x_i)}}{Z^{(m)}}</script></li>
+<li><p>前向分步算法的操作为：<span class="math inline">\(\omega_i^{(m+1)} = e^{-y_if_{m}(x_i)}\)</span></p></li>
+<li><p>AdaBoost的操作为： <span class="math display">\[
+w_i^{(m+1)}=\frac{w_i^{m}e^{-y_i\alpha_mG_m(x_i)}}{Z^{(m)}}
+\]</span></p></li>
 </ul>
 <p>也就是说，AdaBoost和前向分步算法用于分类时对样本权重的更新操作上，AdaBoost对权重值进行了归一化的处理，保证了所有权重值在一个分布上，而前向分步算法更新权重时没有进行归一化。</p>
-<h3 id="提升树"><a href="#提升树" class="headerlink" title="提升树"></a>提升树</h3><h4 id="分类提升树"><a href="#分类提升树" class="headerlink" title="分类提升树"></a>分类提升树</h4><p>基分类器是二分类器，每个分类器的权重为1</p>
-<h4 id="回归提升树"><a href="#回归提升树" class="headerlink" title="回归提升树"></a>回归提升树</h4><h4 id="GBDT——梯度提升树"><a href="#GBDT——梯度提升树" class="headerlink" title="GBDT——梯度提升树"></a>GBDT——梯度提升树</h4><p>当损失函数是平方损失函数和指数损失函数时，提升树的优化过程是比较明确的，但是当损失函数是一般函数时，每一步的优化就变的不那么明确，因而提出梯度提升算法。</p>
-<h5 id="负梯度拟合参差的原理"><a href="#负梯度拟合参差的原理" class="headerlink" title="负梯度拟合参差的原理"></a>负梯度拟合参差的原理</h5><p>首先给出提升树的加法模型：</p>
-<script type="math/tex; mode=display">
-f_m(x^i)=f_{m-1}(x^i)+T(x;\Theta_m)\tag{1}</script><p>提升树的目标时每次拟合出一棵树之后，当前模型的损失要小于上一个模型的损失：</p>
-<script type="math/tex; mode=display">
-L(y^{i},f_m(x^i))<L(y^{i},f_{m-1}(x^i))\qquad \Longrightarrow \qquad L(y^{i},f_{m-1}(x^i))-L(y^{i},f_m(x^i))>0\tag{2}</script><p>一阶泰勒标准展开式为：</p>
-<script type="math/tex; mode=display">
-f(x) \approx f(x_0)+f'(x_0)(x-x_0)\tag{3}</script><p>当$x_0=f_{m-1}(x^i)$时</p>
-<script type="math/tex; mode=display">
+<h3 id="提升树">提升树</h3>
+<h4 id="分类提升树">分类提升树</h4>
+<p>基分类器是二分类器，每个分类器的权重为1</p>
+<h4 id="回归提升树">回归提升树</h4>
+<h4 id="gbdt梯度提升树">GBDT——梯度提升树</h4>
+<p>当损失函数是平方损失函数和指数损失函数时，提升树的优化过程是比较明确的，但是当损失函数是一般函数时，每一步的优化就变的不那么明确，因而提出梯度提升算法。</p>
+<h5 id="负梯度拟合参差的原理">负梯度拟合参差的原理</h5>
+<p>首先给出提升树的加法模型： <span class="math display">\[
+f_m(x^i)=f_{m-1}(x^i)+T(x;\Theta_m)\tag{1}
+\]</span> 提升树的目标时每次拟合出一棵树之后，当前模型的损失要小于上一个模型的损失： <span class="math display">\[
+L(y^{i},f_m(x^i))&lt;L(y^{i},f_{m-1}(x^i))\qquad \Longrightarrow \qquad L(y^{i},f_{m-1}(x^i))-L(y^{i},f_m(x^i))&gt;0\tag{2}
+\]</span> 一阶泰勒标准展开式为： <span class="math display">\[
+f(x) \approx f(x_0)+f&#39;(x_0)(x-x_0)\tag{3}
+\]</span> 当<span class="math inline">\(x_0=f_{m-1}(x^i)\)</span>时 <span class="math display">\[
 \begin{aligned}
-&L(y^{i},f_m(x^i))=L(y^{i},f_{m-1}(x^i))+\frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)} (f_m(x^i)-f_{m-1}(x^i))\\
-\end{aligned}</script><p>要使$\qquad\qquad L(y^{i},f_{m-1}(x^i))-L(y^{i},f_m(x^i))\geq0$</p>
-<p>即$\qquad\qquad \frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)}(f_m(x^i)-f_{m-1}(x^i))\geq0\\$</p>
-<p>又知$\qquad\qquad f_m(x^i)-f_{m-1}(x^i)=T(x;\Theta_m)\\$</p>
-<p>则$\qquad\qquad -\frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)}(f_m(x^i)-f_{m-1}(x^i))=-\frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)}T(x;\Theta_m)\geq0\\$</p>
-<p>若能使$\qquad -\frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)} \approx T(x;\Theta_m)$</p>
-<p>则能保证</p>
-<script type="math/tex; mode=display">
--\frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)}T(x;\Theta_m)\geq0 \Rightarrow L(y^{i},f_{m-1}(x^i))-L(y^{i},f_m(x^i))\geq0</script><p>此时即有残差：</p>
-<script type="math/tex; mode=display">
-\gamma_m(x^i,y^i)=-\left[{\frac{\partial L(y^{i},f_{m}(x^i))}{\partial f_{m}(x^i)} }\right]_{f_{m}(x^i)=f_{m-1}(x^i)}\tag{4}</script><h5 id="GBDT算法流程"><a href="#GBDT算法流程" class="headerlink" title="GBDT算法流程"></a>GBDT算法流程</h5><img src="/posts/a314b8ce/3.png" class="" alt="3">
-<p>算法第 1 步初始化，估计使损 失函数极小化的常数值 ，它是只有一个根结点的树。</p>
-<p>第 2(a) 步计算损失函数的负梯度在当前模型的值，将它作为残差的估计。对于平方损失函数 ，它就是通常所说的残差；对于一般损失函数，它就是残差的近似值，见(5)式。</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&MSE=cost=\frac{1}{2}(y_i-f_m(x_i))^2,{x_i \in R_{mj}}\qquad 对f_m(x_i)求导：\\
-&\frac{\partial cost}{\partial f_m(x_i)}=f_m(x_i)-y_i\\
-&-\frac{\partial cost}{\partial f_m(x_i)}=y_i-f_m(x_i)
+&amp;L(y^{i},f_m(x^i))=L(y^{i},f_{m-1}(x^i))+\frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)} (f_m(x^i)-f_{m-1}(x^i))\\
 \end{aligned}
-\tag{5}</script><p>第 2(b) 步估计回归树叶结点区域 ，以拟合残差的近似值。</p>
+\]</span> 要使<span class="math inline">\(\qquad\qquad L(y^{i},f_{m-1}(x^i))-L(y^{i},f_m(x^i))\geq0\)</span></p>
+<p>即<span class="math inline">\(\qquad\qquad \frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)}(f_m(x^i)-f_{m-1}(x^i))\geq0\\\)</span></p>
+<p>又知<span class="math inline">\(\qquad\qquad f_m(x^i)-f_{m-1}(x^i)=T(x;\Theta_m)\\\)</span></p>
+<p>则<span class="math inline">\(\qquad\qquad -\frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)}(f_m(x^i)-f_{m-1}(x^i))=-\frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)}T(x;\Theta_m)\geq0\\\)</span></p>
+<p>若能使<span class="math inline">\(\qquad -\frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)} \approx T(x;\Theta_m)\)</span></p>
+<p>则能保证 <span class="math display">\[
+-\frac{\partial L(y^{i},f_{m-1}(x^i))}{\partial f_{m-1}(x^i)}T(x;\Theta_m)\geq0 \Rightarrow L(y^{i},f_{m-1}(x^i))-L(y^{i},f_m(x^i))\geq0
+\]</span> 此时即有残差： <span class="math display">\[
+\gamma_m(x^i,y^i)=-\left[{\frac{\partial L(y^{i},f_{m}(x^i))}{\partial f_{m}(x^i)} }\right]_{f_{m}(x^i)=f_{m-1}(x^i)}\tag{4}
+\]</span></p>
+<h5 id="gbdt算法流程">GBDT算法流程</h5>
+<img src="/posts/a314b8ce/3.png" class="" alt="3">
+<p>算法第 1 步初始化，估计使损 失函数极小化的常数值 ，它是只有一个根结点的树。</p>
+<p>第 2(a) 步计算损失函数的负梯度在当前模型的值，将它作为残差的估计。对于平方损失函数 ，它就是通常所说的残差；对于一般损失函数，它就是残差的近似值，见(5)式。 <span class="math display">\[
+\begin{aligned}
+&amp;MSE=cost=\frac{1}{2}(y_i-f_m(x_i))^2,{x_i \in R_{mj}}\qquad 对f_m(x_i)求导：\\
+&amp;\frac{\partial cost}{\partial f_m(x_i)}=f_m(x_i)-y_i\\
+&amp;-\frac{\partial cost}{\partial f_m(x_i)}=y_i-f_m(x_i)
+\end{aligned}
+\tag{5}
+\]</span> 第 2(b) 步估计回归树叶结点区域 ，以拟合残差的近似值。</p>
 <p>第 2(c) 步利用线性搜索估计叶结点区域的值，使损失函数极小化 。</p>
 <p>第 2(d) 步更新回归树。</p>
-<p>第 3 步得到输出的最终模型$\hat{f}(x) $ 。</p>
-<h5 id="GBDT如何处理分类问题"><a href="#GBDT如何处理分类问题" class="headerlink" title="GBDT如何处理分类问题"></a>GBDT如何处理分类问题</h5><p>考虑线性回归$y=w^Tx$，在做分类问题时，通常做法为加上一个对数几率函数转换为逻辑回归：</p>
-<script type="math/tex; mode=display">
-P(y=1|x)=\frac{1}{1+e^{-w^Tx}}</script><p>GBDT同理，借助对数几率函数将原本的回归输出值转换为概率：</p>
-<script type="math/tex; mode=display">
-P(y=1|x)=\frac{1}{1+e^{-f(x)}}\tag{1}</script><p>那么接下来GBDT的训练过程需要以逻辑回归为参照。$P(y=1|x)$简写为P，$y_i$为类标，取值为0或1。逻辑回归采用极大似然估计推导出的损失函数为：</p>
-<script type="math/tex; mode=display">
-L=w^T(x-xy)+ln^{1+e^{-w^Tx}}</script><p>同理，GBDT采用的损失函数可以是：</p>
-<script type="math/tex; mode=display">
-L=f(x)(1-y)+ln^{1+e^{-f(x)}}\tag{2}</script><p>用负梯度计算残差，可得：</p>
-<script type="math/tex; mode=display">
-\left[ -\frac{\partial L(y_i,f_m(x_i))}{\partial f_m(x_i)}\right]_{f_m(x_i)=f_{m-1}(x_i)}=y_i-\frac{1}{1+e^{-f_m(x_i)}}\tag{3}</script><p>同时使用回归树来拟合残差，在分类的这个过程中建立回归树，需要遍历每个样本，每个特征下不同切分点时的情况，联系回归树的建立过程。</p>
-<p>接着对于每个叶子结点，计算最佳残差拟合值：</p>
-<script type="math/tex; mode=display">
-\gamma_{mj}=\underset{r}{argmin}\sum_{x_i \in R_{mj}}L \left (y_i,f_{(m-1)}(x_i)+\gamma \right)\tag{4}</script><p>意思是在刚构建的树 m 中， 找到每个节点 j 的输出$ \gamma_{mj}$ , 能使得该节点的loss最小。</p>
-<p>$\gamma_{mj}$的求解过程：</p>
-<script type="math/tex; mode=display">
-L(y_i，F_{m-1}(x_i)+\gamma)=-y_i(F_{m-1}(x_1)+\gamma)+log(1+e^{F_{m-1}(x_1)+\gamma})</script>
+<p>第 3 步得到输出的最终模型$(x) $ 。</p>
+<h5 id="gbdt如何处理分类问题">GBDT如何处理分类问题</h5>
+<p>考虑线性回归<span class="math inline">\(y=w^Tx\)</span>，在做分类问题时，通常做法为加上一个对数几率函数转换为逻辑回归： <span class="math display">\[
+P(y=1|x)=\frac{1}{1+e^{-w^Tx}}
+\]</span> GBDT同理，借助对数几率函数将原本的回归输出值转换为概率： <span class="math display">\[
+P(y=1|x)=\frac{1}{1+e^{-f(x)}}\tag{1}
+\]</span> 那么接下来GBDT的训练过程需要以逻辑回归为参照。<span class="math inline">\(P(y=1|x)\)</span>简写为P，<span class="math inline">\(y_i\)</span>为类标，取值为0或1。逻辑回归采用极大似然估计推导出的损失函数为： <span class="math display">\[
+L=w^T(x-xy)+ln^{1+e^{-w^Tx}}
+\]</span> 同理，GBDT采用的损失函数可以是： <span class="math display">\[
+L=f(x)(1-y)+ln^{1+e^{-f(x)}}\tag{2}
+\]</span> 用负梯度计算残差，可得： <span class="math display">\[
+\left[ -\frac{\partial L(y_i,f_m(x_i))}{\partial f_m(x_i)}\right]_{f_m(x_i)=f_{m-1}(x_i)}=y_i-\frac{1}{1+e^{-f_m(x_i)}}\tag{3}
+\]</span> 同时使用回归树来拟合残差，在分类的这个过程中建立回归树，需要遍历每个样本，每个特征下不同切分点时的情况，联系回归树的建立过程。</p>
+<p>接着对于每个叶子结点，计算最佳残差拟合值： <span class="math display">\[
+\gamma_{mj}=\underset{r}{argmin}\sum_{x_i \in R_{mj}}L \left (y_i,f_{(m-1)}(x_i)+\gamma \right)\tag{4}
+\]</span> 意思是在刚构建的树 m 中， 找到每个节点 j 的输出$ _{mj}$ , 能使得该节点的loss最小。</p>
+<p><span class="math inline">\(\gamma_{mj}\)</span>的求解过程： <span class="math display">\[
+L(y_i，F_{m-1}(x_i)+\gamma)=-y_i(F_{m-1}(x_1)+\gamma)+log(1+e^{F_{m-1}(x_1)+\gamma})
+\]</span></p>
+
     </div>
 
     
@@ -480,7 +492,7 @@ L(y_i，F_{m-1}(x_i)+\gamma)=-y_i(F_{m-1}(x_1)+\gamma)+log(1+e^{F_{m-1}(x_1)+\ga
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E6%A8%A1%E5%9E%8B%EF%BC%88Additive-Model%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">加法模型（Additive Model）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E6%A8%A1%E5%9E%8B%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">加法模型损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">损失函数的优化——前向分步算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.1.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E7%AE%97%E6%B3%95%E5%85%B7%E4%BD%93%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">前向分步算法具体的执行流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AdaBoost-Adaptive-Boosting%E2%80%94%E2%80%94%E8%87%AA%E9%80%82%E5%BA%94%E5%A2%9E%E5%BC%BA%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">AdaBoost(Adaptive Boosting——自适应增强器)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AdaBoost%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">AdaBoost算法原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AdaBoost%E5%92%8C%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E7%AE%97%E6%B3%95%E7%9A%84%E5%BC%82%E5%90%8C"><span class="nav-number">2.2.</span> <span class="nav-text">AdaBoost和前向分步算法的异同</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%8D%87%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">提升树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E6%8F%90%E5%8D%87%E6%A0%91"><span class="nav-number">3.1.</span> <span class="nav-text">分类提升树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E6%8F%90%E5%8D%87%E6%A0%91"><span class="nav-number">3.2.</span> <span class="nav-text">回归提升树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GBDT%E2%80%94%E2%80%94%E6%A2%AF%E5%BA%A6%E6%8F%90%E5%8D%87%E6%A0%91"><span class="nav-number">3.3.</span> <span class="nav-text">GBDT——梯度提升树</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B4%9F%E6%A2%AF%E5%BA%A6%E6%8B%9F%E5%90%88%E5%8F%82%E5%B7%AE%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">3.3.1.</span> <span class="nav-text">负梯度拟合参差的原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GBDT%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">3.3.2.</span> <span class="nav-text">GBDT算法流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GBDT%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="nav-number">3.3.3.</span> <span class="nav-text">GBDT如何处理分类问题</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E6%A8%A1%E5%9E%8Badditive-model"><span class="nav-number">1.</span> <span class="nav-text">加法模型（Additive Model）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E6%A8%A1%E5%9E%8B%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">加法模型损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E4%BC%98%E5%8C%96%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">损失函数的优化——前向分步算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.1.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E7%AE%97%E6%B3%95%E5%85%B7%E4%BD%93%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">前向分步算法具体的执行流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#adaboostadaptive-boosting%E8%87%AA%E9%80%82%E5%BA%94%E5%A2%9E%E5%BC%BA%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">AdaBoost(Adaptive Boosting——自适应增强器)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#adaboost%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">AdaBoost算法原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#adaboost%E5%92%8C%E5%89%8D%E5%90%91%E5%88%86%E6%AD%A5%E7%AE%97%E6%B3%95%E7%9A%84%E5%BC%82%E5%90%8C"><span class="nav-number">2.2.</span> <span class="nav-text">AdaBoost和前向分步算法的异同</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%8D%87%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">提升树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E6%8F%90%E5%8D%87%E6%A0%91"><span class="nav-number">3.1.</span> <span class="nav-text">分类提升树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E6%8F%90%E5%8D%87%E6%A0%91"><span class="nav-number">3.2.</span> <span class="nav-text">回归提升树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gbdt%E6%A2%AF%E5%BA%A6%E6%8F%90%E5%8D%87%E6%A0%91"><span class="nav-number">3.3.</span> <span class="nav-text">GBDT——梯度提升树</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B4%9F%E6%A2%AF%E5%BA%A6%E6%8B%9F%E5%90%88%E5%8F%82%E5%B7%AE%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">3.3.1.</span> <span class="nav-text">负梯度拟合参差的原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gbdt%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">3.3.2.</span> <span class="nav-text">GBDT算法流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gbdt%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="nav-number">3.3.3.</span> <span class="nav-text">GBDT如何处理分类问题</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
